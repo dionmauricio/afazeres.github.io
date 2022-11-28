@@ -1,0 +1,18 @@
+<section [ngClass]="{ 'loading': !listaTarefas.length}">
+    <ul *ngIf="listaTarefas.length">
+        <li *ngFor="let item of listaTarefas; let i = index">
+            <input  type="checkbox" 
+                    [(ngModel)]="item.checagem">
+            <input  type="text" 
+                    (keyup)="validarCampoEmBranco(item.tafera, i)" 
+                    [(ngModel)]="item.tafera" 
+                    [ngClass]="{ 'checked': item.checagem }">
+
+            <button (click)="removerItemDaListaDeTarefas(i)">
+                <img src="assets/icons/icon-trash.svg" alt="">
+            </button>
+        </li>
+    </ul>
+</section>
+<app-todo-input-add-itens (emmitItemListaDeTarefas)="setEmitNaListaDeTarefas($event)"></app-todo-input-add-itens>
+<app-todo-button-delete-all *ngIf="listaTarefas.length" (click)="removeTodosOsItemDaListaDeTarefas()"></app-todo-button-delete-all>
